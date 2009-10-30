@@ -1,10 +1,10 @@
 # Sqlite
 
-include_recipe "sqlite"
-
-gem_package "sqlite3-ruby" do
-  action :install
-end 
+# include_recipe "sqlite"
+# 
+# gem_package "sqlite3-ruby" do
+#   action :install
+# end 
 
 # Thin
 
