@@ -15,10 +15,12 @@ end
 
 template "/tmp/myapp/app.rb" do
   source "app.rb.erb"
+  mode "0755"
 end
 
 template "/etc/apache2/sites-enabled/myapp" do
   source "myapp.erb"
+  mode "0755"
 end
 
 file "/etc/apache2/sites-enabled/000-default" do
