@@ -39,6 +39,7 @@ end
 execute "thin" do
   command "thin start -R config.ru -d"
   creates "tmp/pids/thin.pid"
+  cwd "/tmp/myapp"
   action :run
 end
 
