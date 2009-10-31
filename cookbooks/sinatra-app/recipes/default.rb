@@ -1,5 +1,5 @@
 include_recipe "apache2"
-include_recipe "passenger"
+include_recipe "passenger_apache2"
 include_recipe "sinatra"
 
 directory '/tmp/myapp' do
@@ -17,7 +17,18 @@ template "/tmp/myapp/app.rb" do
   source "app.rb.erb"
 end
 
+template "/etc/apache2/sites-enabled/myapp" do
+  source "myapp.erb"
+end
 
+file "/etc/apache2/sites-enabled/default" do
+  action :delete
+end
+
+execute "/etc/init.d/apache2" do
+  command "/etc/init.d/apache2 restart"
+  action :run
+end
 #remote_directory "/tmp/myapp" do
 #  source "app"
 #  files_backup 10
