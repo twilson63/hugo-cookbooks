@@ -1,7 +1,10 @@
+include_recipe "apache2"
+include_recipe "passenger_apache2::mod_rails"
+include_recipe "sinatra"
+
+
 require 'chef-deploy'
 
-include_recipe "sinatra"
-#include_recipe "ruby-git"
 
 chef-deploy "/apps/hugo-server" do
   repo "git://github.com/twilson63/hugo-server.git"
