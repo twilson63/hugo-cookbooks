@@ -1,3 +1,5 @@
+include_recipe "apache2"
+include_recipe "passenger"
 include_recipe "sinatra"
 
 directory '/tmp/myapp' do
@@ -9,13 +11,13 @@ end
 
 template "/tmp/myapp/config.ru" do
   source "config.ru.erb"
-
 end
 
 template "/tmp/myapp/app.rb" do
-
   source "app.rb.erb"
 end
+
+
 #remote_directory "/tmp/myapp" do
 #  source "app"
 #  files_backup 10
@@ -36,12 +38,12 @@ end
 # end
 
 # thin start -R config.ru
-execute "thin" do
-  command "thin start -R config.ru -d"
-  creates "tmp/pids/thin.pid"
-  cwd "/tmp/myapp"
-  action :run
-end
+#execute "thin" do
+#  command "thin start -R config.ru -d"
+#  creates "tmp/pids/thin.pid"
+#  cwd "/tmp/myapp"
+#  action :run
+#end
 
 
 
