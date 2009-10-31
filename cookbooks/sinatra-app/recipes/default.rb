@@ -1,5 +1,5 @@
 include_recipe "apache2"
-include_recipe "passenger_apache2"
+include_recipe "passenger_apache2::modrails"
 include_recipe "sinatra"
 
 directory '/tmp/myapp' do
@@ -21,7 +21,7 @@ template "/etc/apache2/sites-enabled/myapp" do
   source "myapp.erb"
 end
 
-file "/etc/apache2/sites-enabled/default" do
+file "/etc/apache2/sites-enabled/000-default" do
   action :delete
 end
 
