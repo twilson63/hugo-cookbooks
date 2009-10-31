@@ -11,6 +11,7 @@ end
 
 template "/tmp/myapp/config.ru" do
   source "config.ru.erb"
+  mode "0755"
 end
 
 template "/tmp/myapp/app.rb" do
@@ -20,7 +21,6 @@ end
 
 template "/etc/apache2/sites-enabled/myapp" do
   source "myapp.erb"
-  mode "0755"
 end
 
 file "/etc/apache2/sites-enabled/000-default" do
