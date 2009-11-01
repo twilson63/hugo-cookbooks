@@ -14,5 +14,4 @@ chef-deploy "/apps/hugo-server" do
   shallow_clone true
   action :deploy
 
-
 end
