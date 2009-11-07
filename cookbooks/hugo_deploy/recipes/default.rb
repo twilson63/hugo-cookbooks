@@ -1,6 +1,6 @@
 include_recipe "git"
 include_recipe "github_keys"
-include_recipe "ssh_known_hosts"
+#include_recipe "ssh_known_hosts"
 
 # Include Hugo Server Stuff
 
