@@ -1,7 +1,7 @@
 directory '/home/ubuntu/.ssh' do
   owner "ubuntu"
   group "ubuntu"
-  mode "0644"
+  mode "0755"
   action :create
   recursive true
 end
