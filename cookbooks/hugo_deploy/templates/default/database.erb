@@ -1,9 +1,9 @@
 production:
   adapter: mysql
   encoding: utf8
-  host: <%= node[:database][:uri] %>
-  database: <%= node[:application] %>
+  host: <%= @node[:database][:uri] %>
+  database: <%= @node[:application] %>
   pool: 10
-  username: <%= node[:database][:user] %>
-  password: <%= node[:database][:password] %>
+  username: <%= @node[:database][:user] %>
+  password: <%= @node[:database][:password] %>
   
