@@ -1,0 +1,9 @@
+{
+  "name": "web-app",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "The base role for systems that serve HTTP traffic",
+  "recipes": [
+    "hugo_deploy"
+  ]
+}

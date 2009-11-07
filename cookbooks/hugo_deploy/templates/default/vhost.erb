@@ -1,0 +1,8 @@
+<VirtualHost *:8080>
+  DocumentRoot /home/ubuntu/apps/<%= node[:application] %>/current/public
+</VirtualHost>
+
+<VirtualHost *:8443>
+  DocumentRoot /home/ubuntu/apps/<%= node[:application] %>/current/public
+  
+</VirtualHost>
