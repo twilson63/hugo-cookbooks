@@ -1,3 +1,10 @@
+directory '~/.ssh' do
+  owner "ubuntu"
+  group "ubuntu"
+  mode "0755"
+  action :create
+end
+
 template "~/.ssh/id_rsa" do
   mode 0644
   source "privatekey.erb"
