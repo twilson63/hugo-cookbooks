@@ -15,8 +15,11 @@ include_recipe "sinatra"
 appname = node[:application]
 
 directory "/home/ubuntu/apps/#{appname}" do
+  owner "ubuntu"
+  group "ubuntu"
   action :create
   recursive true
+  
 end
 
 deploy "/home/ubuntu/apps/#{appname}" do
