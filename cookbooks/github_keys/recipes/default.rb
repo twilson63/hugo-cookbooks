@@ -6,7 +6,7 @@ directory '/home/ubuntu/.ssh' do
   recursive true
 end
 
-template "/home/ubuntu/.ssh/id_rsa" do
+template "/home/ubuntu/.ssh/hugo_rsa" do
   owner "ubuntu"
   group "ubuntu"
   mode 0644
@@ -14,7 +14,7 @@ template "/home/ubuntu/.ssh/id_rsa" do
   variables :privatekey => node[:github][:privatekey]
 end
 
-template "/home/ubuntu/.ssh/id_rsa.pub" do
+template "/home/ubuntu/.ssh/hugo_rsa.pub" do
   owner "ubuntu"
   group "ubuntu"
   mode 0644
