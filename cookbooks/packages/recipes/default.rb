@@ -1,4 +1,4 @@
-node[:packages].each do |pkg|
+node[:package_list].each do |pkg|
   package pkg[:name] do
     if pkg[:version] && !pkg[:version].empty?
       version pkg[:version]
