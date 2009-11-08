@@ -12,6 +12,14 @@
 # include_recipe "rails"
 # include_recipe "sinatra"
 
+template "/home/ubuntu/.ssh/known_hosts" do
+  owner "ubuntu"
+  group "ubuntu"  
+  source "known_hosts.erb"
+  
+end
+
+
 
 appname = node[:application]
 
