@@ -1,0 +1,13 @@
+{
+  "name": "sinatra-app",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "The base role for systems that serve HTTP traffic",
+  "recipes": [
+    "apache2",
+    "apache2::mod_ssl",
+    "passenger_apache2::mod_rails",
+    "sinatra",
+    "rails"
+  ]
+}

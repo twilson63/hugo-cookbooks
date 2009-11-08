@@ -9,7 +9,7 @@ end
 template "/home/ubuntu/.ssh/hugo_rsa" do
   owner "ubuntu"
   group "ubuntu"
-  mode 0440
+  mode 0600
   source "privatekey.erb"
   variables :privatekey => node[:github][:privatekey]
 end
@@ -17,7 +17,7 @@ end
 template "/home/ubuntu/.ssh/hugo_rsa.pub" do
   owner "ubuntu"
   group "ubuntu"
-  mode 0440
+  mode 0600
   source "publickey.erb"
   variables :publickey => node[:github][:publickey]
 end
