@@ -1,5 +1,5 @@
 {
-  "name": "sinatra-app",
+  "name": "web-base",
   "chef_type": "role",
   "json_class": "Chef::Role",
   "description": "The base role for systems that serve HTTP traffic",
