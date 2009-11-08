@@ -32,22 +32,34 @@ deploy "/home/ubuntu/apps/#{appname}" do
   action :deploy
 end
 
+directory "/home/ubuntu/apps/#{appname}/shared/config" do
+  owner "ubuntu"
+  group "ubuntu"
+  action :create
+  recursive true
+  
+end
+
 ### Do Database config
-template "/home/ubuntu/apps/#{appname}/current/config/database.yml" do
+template "/home/ubuntu/apps/#{appname}/shared/config/database.yml" do
+  owner "ubuntu"
+  group "ubuntu"
   source "database.erb"
 end
 
 
 ### Apache Config
-template "/etc/apache2/sites-enabled/#{appname}" do
+template "/home/ubuntu/apps/#{appname}/shared/config/apache2.conf" do
+  owner "ubuntu"
+  group "ubuntu"  
   source "vhost.erb"
 end
 
-file "/etc/apache2/sites-enabled/000-default" do
-  action :delete
-end
-
-execute "/etc/init.d/apache2" do
-  command "/etc/init.d/apache2 restart"
-  action :run
-end
+# file "/etc/apache2/sites-enabled/000-default" do
+#   action :delete
+# end
+# 
+# execute "/etc/init.d/apache2" do
+#   command "/etc/init.d/apache2 restart"
+#   action :run
+# end
