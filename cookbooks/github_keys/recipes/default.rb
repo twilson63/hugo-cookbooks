@@ -27,6 +27,7 @@ template "/home/ubuntu/.ssh/config" do
   group "ubuntu"
   mode "0600"
   source "config.erb"
+  variables :application => node[:application]
 end
 
 template "/home/ubuntu/.ssh/known_hosts" do
