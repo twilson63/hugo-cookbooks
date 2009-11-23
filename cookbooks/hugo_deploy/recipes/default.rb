@@ -23,6 +23,7 @@ end
 
 deploy "/home/ubuntu/apps/#{appname}" do
   repo "#{node[:github][:url]}/#{appname}.git"
+  user "ubuntu"
   branch "HEAD"
   environment "production"
   restart_command "touch tmp/restart.txt"
@@ -35,7 +36,6 @@ directory "/home/ubuntu/apps/#{appname}/shared/config" do
   group "ubuntu"
   action :create
   recursive true
-  
 end
 
 ### Do Database config
@@ -44,7 +44,6 @@ template "/home/ubuntu/apps/#{appname}/shared/config/database.yml" do
   group "ubuntu"
   source "database.erb"
 end
-
 
 ### Apache Config
 template "/home/ubuntu/apps/#{appname}/shared/config/apache2.conf" do
@@ -56,7 +55,7 @@ end
 # file "/etc/apache2/sites-enabled/000-default" do
 #   action :delete
 # end
-# 
+#
 # execute "/etc/init.d/apache2" do
 #   command "/etc/init.d/apache2 restart"
 #   action :run
