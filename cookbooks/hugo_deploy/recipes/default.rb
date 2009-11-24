@@ -52,9 +52,22 @@ template "/home/ubuntu/apps/#{appname}/shared/config/apache2.conf" do
   source "vhost.erb"
 end
 
-# file "/etc/apache2/sites-enabled/000-default" do
-#   action :delete
-# end
+file "/etc/apache2/sites-enabled/000-default" do
+  action :delete
+end
+
+execute "ln" do
+  command "sudo ln -nsf /home/ubuntu/apps/#{appname}/shared/config/apache2.conf /etc/apache2/sites-enabled/#{appname}"
+  action :run
+end
+
+execute "ln" do
+  command "ln -nsf /home/ubuntu/apps/#{appname}/shared/config/database.yml /home/ubuntu/apps/#{appname}/current/config/database.yml"
+  action :run
+end
+
+
+
 #
 # execute "/etc/init.d/apache2" do
 #   command "/etc/init.d/apache2 restart"
