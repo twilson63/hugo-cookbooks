@@ -6,7 +6,6 @@
   "recipes": [
     "packages",
     "gems",
-    "github_keys",
     "apache2",
     "apache2::mod_ssl",
     "passenger_apache2::mod_rails",
