@@ -3,9 +3,6 @@ remote_file "/tmp/s3fs-r177-source.tar.gz" do
   mode 0644
 end
 
-custname = 
-
-
 bash "install s3fs" do
   cwd "/tmp"
   code <<-EOH
@@ -18,7 +15,7 @@ bash "install s3fs" do
 
   EOH
   
-  not_if { File.exists?("/tmp/s3fs-r177-source.tar.gz") }
+  not_if { File.exists?("/usr/bin/s3fs") }
 end
 
 
