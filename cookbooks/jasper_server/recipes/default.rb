@@ -3,7 +3,7 @@
 end
 # http://sourceforge.net/projects/jasperserver/files/JasperServer/JasperServer%203.7.0%20RC/jasperserver-ce-3.7.0-RC-bin.zip/download
 
-remote_file "/tmp/jasperserver-ce-3.7.0-RC-bin.zip" do
+remote_file "/tmp/jasperserver-ce-3.7.0-RC-bin" do
   source "http://sourceforge.net/projects/jasperserver/files/JasperServer/JasperServer%203.7.0%20RC/jasperserver-ce-3.7.0-RC-linux-installer.bin/download"
   mode 0644
 end
