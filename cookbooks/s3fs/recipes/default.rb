@@ -6,10 +6,16 @@ end
 bash "install s3fs" do
   cwd "/tmp"
   code <<-EOH
-  tar -zxvf s3fs-r177-source.tar.gz
-  cd ./s3fs
-  make
-  make install
+  tar zxvf s3fs-r177-source.tar.gz
+  cd s3fs
+  sudo make
+  sudo make install
+  sudo mkdir -p /mnt/#{ node[:customer] } 
+  sudo s3fs #{ node[:customer] }  -o accessKeyId=#{ node[:access_key] } -o secretAccessKey=#{ node[:secret_key] } -o allow_other /mnt/#{ node[:customer] } 
+
   EOH
-  not_if { File.exists?("/tmp/s3fs-r177-source.tar.gz") }
+  
+  not_if { File.exists?("/usr/bin/s3fs") }
 end
+
+
