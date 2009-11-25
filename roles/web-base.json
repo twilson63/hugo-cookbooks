@@ -10,7 +10,6 @@
     "apache2::mod_ssl",
     "apache2::mod_xsendfile",
     "passenger_apache2::mod_rails",
-    "s3fs",
     "sinatra",
     "rails"
   ]
