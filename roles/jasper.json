@@ -1,0 +1,9 @@
+{
+  "name": "jasper",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "This role is for JasperServer 3.7",
+  "recipes": [
+    "jasper_server"
+  ]
+}
