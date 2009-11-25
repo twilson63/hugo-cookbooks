@@ -6,8 +6,8 @@ end
 bash "install s3fs" do
   cwd "/tmp"
   code <<-EOH
-  tar zxvf s3fs-r177-source.tar.gz
-  cd s3fs
+  tar -zxvf s3fs-r177-source.tar.gz
+  cd ./s3fs
   make
   make install
   EOH
