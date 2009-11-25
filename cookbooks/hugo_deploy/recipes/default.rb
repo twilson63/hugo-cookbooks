@@ -52,6 +52,29 @@ template "/home/ubuntu/apps/#{appname}/shared/config/apache2.conf" do
   source "vhost.erb"
 end
 
+if node[:app][:ssl]
+  ### Apache SSL Public Key
+  template "/etc/ssl/certs/#{node[:customer]}.crt" do
+    owner "root"
+    group "root"  
+    source "public.erb"
+  end
+
+  ### Apache SSL Private Key
+  template "/etc/ssl/certs/#{node[:customer]}.key" do
+    owner "root"
+    group "root"  
+    source "public.erb"
+  end
+
+  ### Apache GD Bundle
+  template "/etc/ssl/certs/gd_bundle.crt" do
+    owner "root"
+    group "root"  
+    source "gd_bundle.erb"
+  end
+end
+
 file "/etc/apache2/sites-enabled/000-default" do
   action :delete
 end

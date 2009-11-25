@@ -2,7 +2,14 @@
   DocumentRoot /home/ubuntu/apps/<%= @node[:application] %>/current/public
 </VirtualHost>
 
+<% if @node[:app][:ssl] %>
 <VirtualHost *:8443>
   DocumentRoot /home/ubuntu/apps/<%= @node[:application] %>/current/public
   
+  SSLEngine on
+  SSLCertificateFile /etc/ssl/certs/<%= @node[:customer] %>.crt
+  SSLCertificateKeyFile /etc/ssl/certs/<%= @node[:customer] %>.key
+  SSLCertificateChainFile /etc/ssl/certs/gd_bundle.crt
+  
 </VirtualHost>
+<% end %>
