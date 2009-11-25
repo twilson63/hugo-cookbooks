@@ -57,14 +57,14 @@ if node[:app][:ssl]
   template "/etc/ssl/certs/#{node[:customer]}.crt" do
     owner "root"
     group "root"  
-    source "public.erb"
+    source "publickey.erb"
   end
 
   ### Apache SSL Private Key
   template "/etc/ssl/certs/#{node[:customer]}.key" do
     owner "root"
     group "root"  
-    source "public.erb"
+    source "privatekey.erb"
   end
 
   ### Apache GD Bundle
