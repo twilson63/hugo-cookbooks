@@ -1,3 +1,7 @@
+%w{ pkg-config libcurl4-openssl-dev libfuse-dev libfuse2 }.each do |pkg|
+  package pkg
+end
+
 remote_file "/tmp/s3fs-r177-source.tar.gz" do
   source "http://s3fs.googlecode.com/files/s3fs-r177-source.tar.gz"
   mode 0644
