@@ -8,6 +8,7 @@
     "gems",
     "apache2",
     "apache2::mod_ssl",
+    "apache2::mod_xsendfile",
     "passenger_apache2::mod_rails",
     "sinatra",
     "rails"
