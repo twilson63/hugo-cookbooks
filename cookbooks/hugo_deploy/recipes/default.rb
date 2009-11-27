@@ -38,6 +38,14 @@ directory "/home/ubuntu/apps/#{appname}/shared/config" do
   recursive true
 end
 
+### Create Log Directory
+directory "/home/ubuntu/apps/#{appname}/shared/log" do
+  owner "ubuntu"
+  group "ubuntu"
+  action :create
+  recursive true
+end
+
 ### Do Database config
 template "/home/ubuntu/apps/#{appname}/shared/config/database.yml" do
   owner "ubuntu"
@@ -88,6 +96,11 @@ end
 
 execute "ln" do
   command "ln -nsf /home/ubuntu/apps/#{appname}/shared/config/database.yml /home/ubuntu/apps/#{appname}/current/config/database.yml"
+  action :run
+end
+
+execute "ln" do
+  command "ln -nsf /home/ubuntu/apps/#{appname}/shared/log /home/ubuntu/apps/#{appname}/current/log"
   action :run
 end
 
