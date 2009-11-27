@@ -21,18 +21,6 @@ directory "/home/ubuntu/apps/#{appname}" do
   recursive true
 end
 
-deploy "/home/ubuntu/apps/#{appname}" do
-  repo "#{node[:github][:url]}/#{appname}.git"
-  user "ubuntu"
-  branch "HEAD"
-  environment "production"
-  restart_command "touch tmp/restart.txt"
-  shallow_clone true
-  migrate true
-  migration_command "rake db:migrate"
-  action :deploy
-end
-
 directory "/home/ubuntu/apps/#{appname}/shared/config" do
   owner "ubuntu"
   group "ubuntu"
@@ -48,6 +36,7 @@ directory "/home/ubuntu/apps/#{appname}/shared/log" do
   recursive true
 end
 
+
 ### Do Database config
 template "/home/ubuntu/apps/#{appname}/shared/config/database.yml" do
   owner "ubuntu"
@@ -60,6 +49,19 @@ template "/home/ubuntu/apps/#{appname}/shared/config/apache2.conf" do
   owner "ubuntu"
   group "ubuntu"  
   source "vhost.erb"
+end
+
+
+deploy "/home/ubuntu/apps/#{appname}" do
+  repo "#{node[:github][:url]}/#{appname}.git"
+  user "ubuntu"
+  branch "HEAD"
+  environment "production"
+  restart_command "touch tmp/restart.txt"
+  shallow_clone true
+  migrate true
+  migration_command "rake db:migrate"
+  action :deploy
 end
 
 
