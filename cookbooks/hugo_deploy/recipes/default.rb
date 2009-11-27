@@ -52,6 +52,8 @@ template "/home/ubuntu/apps/#{appname}/shared/config/apache2.conf" do
   source "vhost.erb"
 end
 
+
+
 if node[:app][:ssl]
   ### Apache SSL Public Key
   template "/etc/ssl/certs/#{node[:customer]}.crt" do

@@ -4,6 +4,7 @@
   "json_class": "Chef::Role",
   "description": "The base role for systems that serve HTTP traffic",
   "recipes": [
+    "github_keys",
     "packages",
     "gems",
     "apache2",

@@ -30,10 +30,10 @@ template "/home/ubuntu/.ssh/config" do
   variables :application => node[:application]
 end
 
-template "/home/ubuntu/.ssh/known_hosts" do
-  owner "ubuntu"
-  group "ubuntu"
-  mode "0600"
-  source "known_hosts.erb"
-  variables :known_hosts => node[:ssh][:known_hosts]
-end
+# template "/home/ubuntu/.ssh/known_hosts" do
+#   owner "ubuntu"
+#   group "ubuntu"
+#   mode "0600"
+#   source "known_hosts.erb"
+#   variables :known_hosts => node[:ssh][:known_hosts]
+# end
