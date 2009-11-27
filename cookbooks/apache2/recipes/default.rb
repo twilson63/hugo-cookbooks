@@ -157,7 +157,6 @@ template "#{node[:apache][:dir]}/ports.conf" do
   variables :apache_listen_ports => node[:apache][:listen_ports]
   mode 0644
   notifies :restart, resources(:service => "apache2")
-  not_if { File.exists?("#{node[:apache][:dir]}/ports.conf") }
 end
 
 template "#{node[:apache][:dir]}/sites-available/default" do
