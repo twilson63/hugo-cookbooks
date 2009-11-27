@@ -1,9 +1,0 @@
-{
-  "name": "experimental",
-  "chef_type": "role",
-  "json_class": "Chef::Role",
-  "description": "The is a role for experimental recipes not in production",
-  "recipes": [
-    "github_keys"
-  ]
-}
