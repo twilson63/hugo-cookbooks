@@ -12,7 +12,7 @@ bash "install jasper server" do
   cwd "/tmp"
   code <<-EOH
   chmod +x jasperserver-ce-3.7.0-RC-bin
-  echo -en \n\n\n\ny\n\n\n\n\n\n\nn\nn\n\nn\n | ./jasperserver-ce-3.7.0-RC-bin
+  echo -en "\n\n\n\ny\n\n\n\n\n\n\nn\nn\n\nn\n" | ./jasperserver-ce-3.7.0-RC-bin
   cd jasperserver-ce-3.7.0
   ./jasperctrl.sh start
   EOH

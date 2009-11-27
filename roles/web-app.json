@@ -4,6 +4,8 @@
   "json_class": "Chef::Role",
   "description": "The base role for systems that serve HTTP traffic",
   "recipes": [
+    "packages",
+    "gems",
     "hugo_deploy"
   ]
 }
