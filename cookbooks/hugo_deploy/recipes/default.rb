@@ -28,6 +28,8 @@ deploy "/home/ubuntu/apps/#{appname}" do
   environment "production"
   restart_command "touch tmp/restart.txt"
   shallow_clone true
+  migrate true
+  migration_command "rake db:migrate"
   action :deploy
 end
 
