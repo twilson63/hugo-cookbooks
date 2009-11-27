@@ -12,6 +12,7 @@ template "/home/ubuntu/.ssh/id_rsa" do
   mode "0600"
   source "privatekey.erb"
   variables :privatekey => node[:github][:privatekey]
+  not_if { File.exists?("/home/ubuntu/.ssh/id_rsa") }
 end
 
 template "/home/ubuntu/.ssh/id_rsa.pub" do
@@ -20,6 +21,7 @@ template "/home/ubuntu/.ssh/id_rsa.pub" do
   mode "0600"
   source "publickey.erb"
   variables :publickey => node[:github][:publickey]
+  not_if { File.exists?("/home/ubuntu/.ssh/id_rsa.pub") }
 end
 
 template "/home/ubuntu/.ssh/config" do
@@ -28,6 +30,7 @@ template "/home/ubuntu/.ssh/config" do
   mode "0600"
   source "config.erb"
   variables :application => node[:application]
+  not_if { File.exists?("/home/ubuntu/.ssh/config") }
 end
 
 # template "/home/ubuntu/.ssh/known_hosts" do
