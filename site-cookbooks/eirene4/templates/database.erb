@@ -1,0 +1,18 @@
+production:
+  adapter: mysql
+  encoding: utf8
+  host: <%= @node[:database][:uri] %>
+  database: <%= @node[:application] %>
+  pool: 10
+  username: <%= @node[:database][:user] %>
+  password: <%= @node[:database][:password] %>
+  
+
+firstdatabank:
+  adapter: mysql
+  encoding: utf8
+  host: <%= @node[:database][:uri] %>
+  database: firstdatabank
+  pool: 10
+  username: <%= @node[:database][:user] %>
+  password: <%= @node[:database][:password] %>  
