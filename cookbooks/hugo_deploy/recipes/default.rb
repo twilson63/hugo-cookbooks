@@ -13,6 +13,7 @@
 # include_recipe "sinatra"
 
 appname = node[:application]
+app_branch = node[:app][:branch] if node[:app] && node[:app][:branch]
 
 directory "/home/ubuntu/apps/#{appname}" do
   owner "ubuntu"
@@ -55,7 +56,7 @@ end
 deploy "/home/ubuntu/apps/#{appname}" do
   repo "#{node[:github][:url]}/#{appname}.git"
   user "ubuntu"
-  branch "HEAD"
+  branch app_branch || "HEAD"
   environment "production"
   restart_command "touch tmp/restart.txt"
   shallow_clone true
