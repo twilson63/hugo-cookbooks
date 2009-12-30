@@ -37,12 +37,13 @@ directory "/home/ubuntu/apps/#{appname}/shared/log" do
   recursive true
 end
 
-
-### Do Database config
-template "/home/ubuntu/apps/#{appname}/shared/config/database.yml" do
-  owner "ubuntu"
-  group "ubuntu"
-  source "database.erb"
+if @node[:database] and @node[:database][:name]
+  ### Do Database config
+  template "/home/ubuntu/apps/#{appname}/shared/config/database.yml" do
+    owner "ubuntu"
+    group "ubuntu"
+    source "database.erb"
+  end
 end
 
 ### Apache Config
