@@ -1,17 +1,3 @@
-#include_recipe "git"
-#include_recipe "github_keys"
-#include_recipe "ssh_known_hosts"
-
-# Include Hugo Server Stuff
-
-# include_recipe "apache2"
-# include_recipe "apache2::mod_ssl"
-# 
-# include_recipe "passenger_apache2::mod_rails"
-
-# include_recipe "rails"
-# include_recipe "sinatra"
-
 appname = node[:application]
 app_branch = node[:app][:branch] if node[:app] && node[:app][:branch]
 
@@ -60,7 +46,9 @@ end
 
 
 deploy "/home/ubuntu/apps/#{appname}" do
-  repo "#{node[:github][:url]}/#{appname}.git"
+  if node[:github][:url]
+    repo "#{node[:github][:url]}/#{appname}.git"
+  end
   user "ubuntu"
   branch app_branch || "HEAD"
   environment "production"
@@ -73,7 +61,7 @@ deploy "/home/ubuntu/apps/#{appname}" do
   if node[:app] && node[:app][:migrate]
     migrate node[:app][:migrate]
   else
-    migrate true
+    migrate false
   end
   if node[:app] && node[:app][:migration_command]
     migration_command node[:app][:migration_command]  
