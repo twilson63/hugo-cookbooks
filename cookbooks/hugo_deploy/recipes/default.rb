@@ -44,6 +44,11 @@ if @node[:database] and @node[:database][:name]
     group "ubuntu"
     source "database.erb"
   end
+  
+  execute "ln" do
+    command "ln -nsf /home/ubuntu/apps/#{appname}/shared/config/database.yml /home/ubuntu/apps/#{appname}/current/config/database.yml"
+    action :run
+  end
 end
 
 ### Apache Config
@@ -100,10 +105,7 @@ execute "ln" do
   action :run
 end
 
-execute "ln" do
-  command "ln -nsf /home/ubuntu/apps/#{appname}/shared/config/database.yml /home/ubuntu/apps/#{appname}/current/config/database.yml"
-  action :run
-end
+
 
 execute "ln" do
   command "ln -nsf /home/ubuntu/apps/#{appname}/shared/log /home/ubuntu/apps/#{appname}/current/log"
