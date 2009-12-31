@@ -1,5 +1,15 @@
 <VirtualHost *:8080>
   DocumentRoot /home/ubuntu/apps/<%= @node[:application] %>/current/public
+  <% if @node[:app] and @node[:app][:web_server_name] %>
+    ServerName <%= @node[:app][:web_server_name] %> 
+  <% end %>
+  <% if @node[:app] and @node[:app][:web_server_aliases] %>
+    <% @node[:app][:web_server_aliases].each do |i| %>
+      ServerAlias <%= @node[:app][:web_server_aliases][i] %> 
+    <% end %>
+  <% end %>
+  
+  
 </VirtualHost>
 
 <% if @node[:app] and @node[:app][:ssl] %>
