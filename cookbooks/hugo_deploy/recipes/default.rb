@@ -64,10 +64,22 @@ deploy "/home/ubuntu/apps/#{appname}" do
   user "ubuntu"
   branch app_branch || "HEAD"
   environment "production"
-  restart_command "touch tmp/restart.txt"
+  if node[:app] && node[:app][:restart_command]
+    restart_command "gem bundle && touch tmp/restart.txt"  
+  else
+    restart_command "touch tmp/restart.txt"
+  end
   shallow_clone true
-  #migrate true
-  #migration_command "rake db:migrate"
+  if node[:app] && node[:app][:migrate]
+    migrate node[:app][:migrate]
+  else
+    migrate true
+  end
+  if node[:app] && node[:app][:migration_command]
+    migration_command node[:app][:migration_command]  
+  else
+    migration_command "rake db:migrate"
+  end
   action :deploy
 end
 
