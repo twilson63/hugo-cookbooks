@@ -53,7 +53,7 @@ deploy "/home/ubuntu/apps/#{appname}" do
   branch app_branch || "HEAD"
   environment "production"
   if node[:app] && node[:app][:restart_command]
-    restart_command "gem bundle && touch tmp/restart.txt"  
+    restart_command node[:app][:restart_command]  
   else
     restart_command "touch tmp/restart.txt"
   end
