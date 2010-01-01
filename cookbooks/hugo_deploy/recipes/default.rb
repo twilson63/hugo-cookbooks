@@ -31,10 +31,6 @@ if @node[:database] and @node[:database][:name]
     source "database.erb"
   end
   
-  execute "ln" do
-    command "ln -nsf /home/ubuntu/apps/#{appname}/shared/config/database.yml /home/ubuntu/apps/#{appname}/current/config/database.yml"
-    action :run
-  end
 end
 
 ### Apache Config
@@ -112,7 +108,13 @@ execute "ln" do
   action :run
 end
 
+if @node[:database] and @node[:database][:name]
 
+  execute "ln" do
+    command "ln -nsf /home/ubuntu/apps/#{appname}/shared/config/database.yml /home/ubuntu/apps/#{appname}/current/config/database.yml"
+    action :run
+  end
+end
 
 #
 # execute "/etc/init.d/apache2" do
