@@ -1,17 +1,3 @@
-#include_recipe "git"
-#include_recipe "github_keys"
-#include_recipe "ssh_known_hosts"
-
-# Include Hugo Server Stuff
-
-# include_recipe "apache2"
-# include_recipe "apache2::mod_ssl"
-# 
-# include_recipe "passenger_apache2::mod_rails"
-
-# include_recipe "rails"
-# include_recipe "sinatra"
-
 appname = node[:application]
 app_branch = node[:app][:branch] if node[:app] && node[:app][:branch]
 
@@ -37,12 +23,14 @@ directory "/home/ubuntu/apps/#{appname}/shared/log" do
   recursive true
 end
 
-
-### Do Database config
-template "/home/ubuntu/apps/#{appname}/shared/config/database.yml" do
-  owner "ubuntu"
-  group "ubuntu"
-  source "database.erb"
+if @node[:database] and @node[:database][:name]
+  ### Do Database config
+  template "/home/ubuntu/apps/#{appname}/shared/config/database.yml" do
+    owner "ubuntu"
+    group "ubuntu"
+    source "database.erb"
+  end
+  
 end
 
 ### Apache Config
@@ -54,14 +42,28 @@ end
 
 
 deploy "/home/ubuntu/apps/#{appname}" do
-  repo "#{node[:github][:url]}/#{appname}.git"
+  if node[:github][:url]
+    repo "#{node[:github][:url]}/#{appname}.git"
+  end
   user "ubuntu"
   branch app_branch || "HEAD"
   environment "production"
-  restart_command "touch tmp/restart.txt"
+  if node[:app] && node[:app][:restart_command]
+    restart_command node[:app][:restart_command]  
+  else
+    restart_command "touch tmp/restart.txt"
+  end
   shallow_clone true
-  migrate true
-  migration_command "rake db:migrate"
+  if node[:app] && node[:app][:migrate]
+    migrate node[:app][:migrate]
+  else
+    migrate false
+  end
+  if node[:app] && node[:app][:migration_command]
+    migration_command node[:app][:migration_command]  
+  else
+    migration_command "rake db:migrate"
+  end
   action :deploy
 end
 
@@ -99,17 +101,20 @@ execute "ln" do
   action :run
 end
 
-execute "ln" do
-  command "ln -nsf /home/ubuntu/apps/#{appname}/shared/config/database.yml /home/ubuntu/apps/#{appname}/current/config/database.yml"
-  action :run
-end
+
 
 execute "ln" do
   command "ln -nsf /home/ubuntu/apps/#{appname}/shared/log /home/ubuntu/apps/#{appname}/current/log"
   action :run
 end
 
+if @node[:database] and @node[:database][:name]
 
+  execute "ln" do
+    command "ln -nsf /home/ubuntu/apps/#{appname}/shared/config/database.yml /home/ubuntu/apps/#{appname}/current/config/database.yml"
+    action :run
+  end
+end
 
 #
 # execute "/etc/init.d/apache2" do
