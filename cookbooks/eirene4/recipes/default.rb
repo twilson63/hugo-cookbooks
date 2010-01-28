@@ -18,8 +18,8 @@ execute "ln" do
   action :run
 end
 
-@bucket = node[:customer] || 'eirene'
-@bucket = 'eirene' if node[:customer] == 'revcare'
+bucket = node[:customer] || 'eirene'
+bucket = 'eirene' if node[:customer] == 'revcare'
 
 template "/home/ubuntu/apps/#{appname}/shared/config/bucket.yml" do
   owner "ubuntu"
