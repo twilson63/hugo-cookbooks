@@ -1,4 +1,6 @@
 appname = node[:application]
+bucket = node[:database][:name] 
+bucket = 'eirene' if @node[:database][:name] == 'eirene4'
 
 ### Do Database config
 template "/home/ubuntu/apps/#{appname}/shared/config/database.yml" do
@@ -18,8 +20,6 @@ execute "ln" do
   action :run
 end
 
-bucket = node[:customer] || 'eirene'
-bucket = 'eirene' if node[:customer] == 'revcare'
 
 template "/home/ubuntu/apps/#{appname}/shared/config/bucket.yml" do
   owner "ubuntu"
