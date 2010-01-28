@@ -1,6 +1,6 @@
 appname = node[:application]
 bucket = node[:database][:name] 
-bucket = 'eirene' if @node[:database][:name] == 'eirene4'
+bucket = 'eirene' if node[:database][:name] == 'eirene4'
 
 ### Do Database config
 template "/home/ubuntu/apps/#{appname}/shared/config/database.yml" do
