@@ -23,6 +23,13 @@ directory "/home/ubuntu/apps/#{appname}/shared/log" do
   recursive true
 end
 
+directory "/home/ubuntu/apps/#{appname}/shared/pids" do
+  owner "ubuntu"
+  group "ubuntu"
+  action :create
+  recursive true
+end
+
 if node[:database] and node[:database][:name]
   ### Do Database config
   template "/home/ubuntu/apps/#{appname}/shared/config/database.yml" do
