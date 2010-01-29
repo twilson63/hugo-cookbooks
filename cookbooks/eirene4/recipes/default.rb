@@ -20,8 +20,6 @@ include_recipe "delayed_job"
 
 if node[:app] and node[:app][:ssl]
 
-  @web_url = node[:app][:url]
-
   template "/home/ubuntu/apps/#{appname}/shared/public/htaccess" do
     owner "ubuntu"
     group "ubuntu"
