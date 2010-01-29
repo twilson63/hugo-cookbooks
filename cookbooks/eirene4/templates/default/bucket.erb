@@ -1,2 +1,2 @@
 production:
-  bucket: <%= @node[:database][:name] %>
+  bucket: <%= @node[:database][:name] == 'revcare' ? 'eirene' : @node[:database][:name] %>
