@@ -16,7 +16,7 @@ end
   end
 end
 
-include_recipe "delayed_job"
+#include_recipe "delayed_job"
 
 if node[:app] and node[:app][:ssl]
 
