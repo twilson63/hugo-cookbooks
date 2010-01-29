@@ -20,6 +20,14 @@ end
 
 if node[:app] and node[:app][:ssl]
 
+  directory "/home/ubuntu/apps/#{appname}/shared/public" do
+    owner "ubuntu"
+    group "ubuntu"
+    action :create
+    recursive true
+  end
+  
+
   template "/home/ubuntu/apps/#{appname}/shared/public/htaccess" do
     owner "ubuntu"
     group "ubuntu"
