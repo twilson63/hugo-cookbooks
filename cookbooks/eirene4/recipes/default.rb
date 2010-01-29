@@ -20,6 +20,17 @@ execute "ln" do
   action :run
 end
 
+template "/home/ubuntu/apps/#{appname}/shared/config/jasper.yml" do
+  owner "ubuntu"
+  group "ubuntu"
+  source "jaspert.erb"
+end
+
+execute "ln" do
+  command "ln -nsf /home/ubuntu/apps/#{appname}/shared/config/jasper.yml /home/ubuntu/apps/#{appname}/current/config/jasper.yml"
+  action :run
+end
+
 
 template "/home/ubuntu/apps/#{appname}/shared/config/bucket.yml" do
   owner "ubuntu"
