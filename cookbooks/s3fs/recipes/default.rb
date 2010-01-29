@@ -14,8 +14,8 @@ bash "install s3fs" do
   cd s3fs
   sudo make
   sudo make install
-  sudo mkdir -p /mnt/#{ node[:customer] } 
-  sudo s3fs #{ node[:customer] }  -o accessKeyId=#{ node[:access_key] } -o secretAccessKey=#{ node[:secret_key] } -o allow_other /mnt/#{ node[:customer] } 
+  sudo mkdir -p /mnt/#{ node[:database][:name] } 
+  sudo s3fs #{ node[:database][:name] }  -o accessKeyId=#{ node[:access_key] } -o secretAccessKey=#{ node[:secret_key] } -o allow_other /mnt/#{ node[:database][:name] } 
 
   EOH
   
