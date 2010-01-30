@@ -1,49 +1,32 @@
 appname = node[:application]
 
-### Do Database config
-template "/home/ubuntu/apps/#{appname}/shared/config/database.yml" do
-  owner "ubuntu"
-  group "ubuntu"
-  source "database.erb"
+['database','s3','bucket','jasper'].each do |file|
+  template "/home/ubuntu/apps/#{appname}/shared/config/#{file}.yml" do
+    owner "ubuntu"
+    group "ubuntu"
+    source "#{file}.erb"
+  end
+
 end
 
-template "/home/ubuntu/apps/#{appname}/shared/config/s3.yml" do
-  owner "ubuntu"
-  group "ubuntu"
-  source "s3.erb"
+['s3','bucket','jasper'].each do |file|
+  execute "ln" do
+    command "ln -nsf /home/ubuntu/apps/#{appname}/shared/config/#{file}.yml /home/ubuntu/apps/#{appname}/current/config/#{file}.yml"
+    action :run
+  end
 end
 
-execute "ln" do
-  command "ln -nsf /home/ubuntu/apps/#{appname}/shared/config/s3.yml /home/ubuntu/apps/#{appname}/current/config/s3.yml"
-  action :run
-end
-
-template "/home/ubuntu/apps/#{appname}/shared/config/bucket.yml" do
-  owner "ubuntu"
-  group "ubuntu"
-  source "bucket.erb"
-end
-
-execute "ln" do
-  command "ln -nsf /home/ubuntu/apps/#{appname}/shared/config/bucket.yml /home/ubuntu/apps/#{appname}/current/config/bucket.yml"
-  action :run
-end
-
-template "/home/ubuntu/apps/#{appname}/shared/config/jasper.yml" do
-  owner "ubuntu"
-  group "ubuntu"
-  source "jasper.erb"
-end
-
-execute "ln" do
-  command "ln -nsf /home/ubuntu/apps/#{appname}/shared/config/jasper.yml /home/ubuntu/apps/#{appname}/current/config/jasper.yml"
-  action :run
-end
-
+#include_recipe "delayed_job"
 
 if node[:app] and node[:app][:ssl]
 
-  @web_url = node[:app][:url]
+  directory "/home/ubuntu/apps/#{appname}/shared/public" do
+    owner "ubuntu"
+    group "ubuntu"
+    action :create
+    recursive true
+  end
+  
 
   template "/home/ubuntu/apps/#{appname}/shared/public/htaccess" do
     owner "ubuntu"
